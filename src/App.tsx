@@ -95,7 +95,18 @@ function App() {
           <div className="listing-toolbar"><div className="filter-tabs">{(['All', 'Buy', 'Rent', 'Invest'] as const).map((item) => <button key={item} className={category === item ? 'filter-tab active' : 'filter-tab'} onClick={() => setCategory(item)}>{item === 'All' ? 'All properties' : item === 'Invest' ? 'Investment' : item === 'Buy' ? 'For sale' : 'For rent'}</button>)}</div><span className="result-count"><SlidersHorizontal size={15} /> {visibleProperties.length} properties</span></div>
           {visibleProperties.length ? <div className="property-grid">{visibleProperties.map((property) => <article className="property-card" key={property.id}>
             <div className="property-image-wrap"><img src={property.image} alt={property.title} loading="lazy" />{property.badge && <span className="property-badge">{property.badge}</span>}<button className={saved.includes(property.id) ? 'save-button saved' : 'save-button'} onClick={() => toggleSaved(property.id)} aria-label={saved.includes(property.id) ? 'Remove saved property' : 'Save property'}><Heart size={17} fill={saved.includes(property.id) ? 'currentColor' : 'none'} /></button><span className="category-chip">{property.category === 'Buy' ? 'For sale' : property.category === 'Rent' ? 'For rent' : 'Investment'}</span></div>
-            <div className="property-info"><div className="property-location"><MapPin size={13} /> {property.location}</div><h3>{property.title}</h3><div className="property-price">{property.priceLabel}</div><div className="property-meta">{property.beds > 0 && <span><BedDouble size={15} /> {property.beds} beds</span>}<span><span className="bath-icon">◌</span> {property.baths} baths</span><span><span className="area-icon">↗</span> {property.area} m²</span></div><div className="property-card-actions"><button onClick={() => setActiveProperty(property)}>View details <ArrowUpRight size={15} /></button><button onClick={() => setBookingProperty(property)}>Book a viewing <ArrowRight size={15} /></button></div></div>
+            <div className="property-info"><div className="property-location">
+              <MapPin size={13} /> 
+              {property.location}
+            </div>
+            <h3>{property.title}</h3>
+            <div className="property-price">
+              {property.category === 'Rent'
+                ? property.priceLabel
+                : money(property.price)}
+            </div>
+            
+            <div className="property-meta">{property.beds > 0 && <span><BedDouble size={15} /> {property.beds} beds</span>}<span><span className="bath-icon">◌</span> {property.baths} baths</span><span><span className="area-icon">↗</span> {property.area} m²</span></div><div className="property-card-actions"><button onClick={() => setActiveProperty(property)}>View details <ArrowUpRight size={15} /></button><button onClick={() => setBookingProperty(property)}>Book a viewing <ArrowRight size={15} /></button></div></div>
           </article>)}</div> : <div className="empty-state"><Search size={26} /><h3>No properties found</h3><p>Try another keyword or change your filters.</p><button onClick={() => { setQuery(''); setType('Any property'); setCategory('All') }}>Clear filters</button></div>}
           <div className="center-action"><a className="button button-outline" href="#contact">Can’t find what you need? Let’s talk <ArrowRight size={16} /></a></div>
         </section>
