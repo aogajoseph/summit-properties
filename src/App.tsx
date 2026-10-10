@@ -140,7 +140,7 @@ function App() {
 
             <div className="hero-actions">
               <a className="button button-dark" href="#listings">Explore properties <ArrowDownRight size={17} /></a>
-              <a className="text-link" href="#services">About us <ArrowRight size={17} /></a>
+              <a className="text-link" href="#services">What we do <ArrowRight size={17} /></a>
             </div>
 
             <div className="hero-proof">
@@ -293,7 +293,8 @@ function App() {
                   <div className="property-image-wrap">
                     <img 
                       src={property.image} 
-                      alt={property.title} loading="lazy" 
+                      alt={property.title} 
+                      loading="lazy" 
                     />
                     {property.badge && <span className="property-badge">{property.badge}</span>}
                     <button 
@@ -314,17 +315,11 @@ function App() {
                       {property.location}
 
                     </div>
-
+ 
                     <h3>{property.title}</h3>
 
                     <div className="property-price">
-
-                      {property.category === 'Rent'
-
-                      ? property.priceLabel
-
-                      : money(property.price)}
-
+                      {property.priceLabel || money(property.price)}
                     </div>
 
                     <div className="property-meta">
@@ -418,7 +413,7 @@ function App() {
 
         <section className="insights-section" id="insights">
           <div className="insights-copy">
-            <div className="eyebrow"><span className="eyebrow-line" /> THE SUMMIT INSIGHT</div>
+            <div className="eyebrow"><span className="eyebrow-line" /> THE SUMMIT INSIGHTS</div>
             <h2>Make your next<br />move a <em>considered one.</em></h2>
             <p>Practical perspectives for buyers, renters and investors making informed property decisions.</p>
             <a className="button button-light" href="#contact">Explore with an advisor <ArrowRight size={16} /></a>
