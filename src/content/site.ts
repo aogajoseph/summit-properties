@@ -3,13 +3,13 @@ export const siteContent = {
   descriptor: 'PROPERTIES',
   tagline: 'Find your next horizon.',
   intro:
-    'Thoughtfully selected homes, remarkable spaces, and investment opportunities with room to grow.',
-  phone: '+254 700 000 000',
-  email: 'hello@summitproperties.example',
-  locations: ['Nairobi', 'Kiambu', 'Coast'],
+    'Thoughtful property guidance for the way you want to live, the value you want to build and the future you envision.',
+  phone: '+123 712 345 678',
+  email: 'info@summitproperties.com',
+  locations: ['Kenya', 'Zanzibar', 'Dubai'],
   stats: [
     { value: '250+', label: 'Properties listed' },
-    { value: '18', label: 'Neighbourhoods covered' },
+    { value: '54', label: 'Locations covered' },
     { value: '96%', label: 'Client satisfaction' },
   ],
 }
@@ -126,22 +126,22 @@ export const services = [
   {
     number: '01',
     title: 'Buy with confidence',
-    text: 'Find a home that fits your life, with clear guidance from first viewing to handover.',
+    text: 'Find the right property for your lifestyle, with expert guidance from viewing to handover.',
   },
   {
     number: '02',
     title: 'Rent with ease',
-    text: 'Explore quality homes and commercial spaces with a smoother, more personal search.',
+    text: 'Discover quality residential and commercial spaces that fit your needs.',
   },
   {
     number: '03',
     title: 'Invest with clarity',
-    text: 'Assess promising opportunities with a practical view of location, demand and long-term potential.',
+    text: 'Identify promising opportunities with a focus on location, demand and long-term value.',
   },
 ]
 
 export const steps = [
-  { number: '01', title: 'Tell us what matters', text: 'Share your goals, preferred areas and budget.' },
-  { number: '02', title: 'Explore a shortlist', text: 'We’ll help you compare spaces and arrange viewings.' },
-  { number: '03', title: 'Make your move', text: 'Navigate the next steps with a dedicated property partner.' },
+  { number: '01', title: 'Tell us what matters', text: 'Share your goals, budget and preferred locations.' },
+  { number: '02', title: 'Explore your options', text: 'Compare shortlisted properties and arrange viewings.' },
+  { number: '03', title: 'Move forward with confidence', text: 'Navigate the next steps with a dedicated property partner.' },
 ]
