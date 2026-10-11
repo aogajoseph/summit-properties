@@ -34,6 +34,9 @@ import AdvisorModal from './components/AdvisorModal'
 import PropertyDetailsModal from './components/PropertyDetailsModal'
 import ViewingModal from './components/ViewingModal'
 
+import QuestionsBeforeChoosingHome from './pages/QuestionsBeforeChoosingHome'
+import EvaluatePropertyPotential from './pages/EvaluatePropertyPotential'
+
 const money = (price: number) => `KES ${new Intl.NumberFormat('en-KE').format(price)}`
 
 function App() {
@@ -139,6 +142,14 @@ function App() {
   const openAdvisor = (type = 'General property advice') => {
     setEnquiryType(type)
     setAdvisorOpen(true)
+  }
+
+  if (window.location.pathname === '/blog/questions-before-choosing-a-home') {
+    return <QuestionsBeforeChoosingHome />
+  }
+
+  if (window.location.pathname === '/blog/evaluate-property-potential') {
+    return <EvaluatePropertyPotential />;
   }
 
   return (
@@ -718,35 +729,27 @@ function App() {
           </div>
 
           <div className="insight-cards">
-
             <article>
-
               <span>BUYING WELL · 5 MIN READ</span>
-
               <h3>Five questions to ask before choosing your next home.</h3>
-
-              <a href="#contact" aria-label="Ask us about buying a home">
-
+              <a
+                href="/blog/questions-before-choosing-a-home"
+                aria-label="Read five questions to ask before choosing your next home"
+              >
                 <ArrowUpRight />
-
               </a>
-
             </article>
 
             <article>
-
               <span>PROPERTY INVESTMENT · 4 MIN READ</span>
-
               <h3>Beyond the price: how to evaluate a property's potential.</h3>
-
-              <a href="#contact" aria-label="Ask us about property investment">
-
+              <a
+                href="/blog/evaluate-property-potential"
+                aria-label="Read how to evaluate a property's potential"
+              >
                 <ArrowUpRight />
-
               </a>
-
             </article>
-
           </div>
 
         </section>
