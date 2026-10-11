@@ -137,7 +137,7 @@ export default function AdvisorModal({
             {!submitting && <ArrowRight size={16} />}
           </button>
           <small className="disclaimer">
-            Your enquiry will be sent through our configured form service.
+            Your enquiry will be sent to our property team. We’ll follow up with you shortly.
           </small>
         </form>
       </div>

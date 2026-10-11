@@ -40,6 +40,45 @@ textarea {
   font: inherit;
 }
 
+select {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 42px 8px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #243247;
+  background-color: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+
+  /* Custom dropdown arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select:hover {
+  border-color: #94a3b8;
+}
+
+select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 12%);
+}
+
+select option {
+  padding: 10px;
+  color: #243247;
+  background-color: #fff;
+}
+
 button {
   cursor: pointer;
 }
