@@ -56,6 +56,9 @@ function App() {
   const [advisorOpen, setAdvisorOpen] = useState(false)
   const [enquiryType, setEnquiryType] = useState('General property advice')
 
+  const [bookingSubmitting, setBookingSubmitting] = useState(false)
+  const [bookingError, setBookingError] = useState('')
+
   const visibleProperties = useMemo(() => properties.filter((property) => {
 
     const matchesCategory = category === 'All' || property.category === category
@@ -78,14 +81,59 @@ function App() {
 
   }
 
-  const handleBooking = (event: FormEvent<HTMLFormElement>) => {
-
+  
+  const handleBooking = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    setNotice('Thanks — your viewing request is ready. Connect this form to your CRM or email service to receive enquiries.')
+    if (!bookingProperty) return
 
-    setBookingProperty(null)
+    const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
 
+    if (!endpoint) {
+      setBookingError(
+        'The booking form is temporarily unavailable. Please try again later.',
+      )
+      return
+    }
+
+    const formData = new FormData(event.currentTarget)
+    const property = bookingProperty
+
+    formData.set('Enquiry Type Selected', 'Property viewing request')
+    formData.set('Property ID', String(property.id))
+    formData.set('Property', property.title)
+    formData.set('Property Location', property.location)
+    formData.set('Property Price', property.priceLabel)
+    formData.set(
+      '_subject',
+      `Property viewing request: ${property.title}`,
+    )
+
+    setBookingSubmitting(true)
+    setBookingError('')
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      })
+
+      if (!response.ok) {
+        throw new Error('Booking submission failed')
+      }
+
+      setBookingProperty(null)
+      setNotice(
+        `Thank you! Your viewing request for ${property.title} has been submitted successfully.`,
+      )
+    } catch {
+      setBookingError(
+        'We couldn’t submit your viewing request. Please check your connection and try again.',
+      )
+    } finally {
+      setBookingSubmitting(false)
+    }
   }
 
   const openAdvisor = (type = 'General property advice') => {
@@ -818,8 +866,13 @@ function App() {
 
       <ViewingModal
         property={bookingProperty}
-        onClose={() => setBookingProperty(null)}
+        onClose={() => {
+          setBookingProperty(null)
+          setBookingError('')
+        }}
         onSubmit={handleBooking}
+        submitting={bookingSubmitting}
+        error={bookingError}
       />
 
       <AdvisorModal

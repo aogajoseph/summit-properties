@@ -6,12 +6,16 @@ interface ViewingModalProps {
   property: Property | null
   onClose: () => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
+  submitting: boolean
+  error: string
 }
 
 export default function ViewingModal({
   property,
   onClose,
   onSubmit,
+  submitting,
+  error,
 }: ViewingModalProps) {
   if (!property) return null
 
@@ -40,48 +44,76 @@ export default function ViewingModal({
         <div className="eyebrow">
           <span className="eyebrow-line" /> PRIVATE VIEWING
         </div>
+
         <h2>
           See if it feels
           <br />
           <em>like your place.</em>
         </h2>
+
         <p>
-          Request a viewing for <strong>{property.title}</strong> in {property.location}.
+          Request a viewing for <strong>{property.title}</strong> in{' '}
+          {property.location}.
         </p>
 
         <form onSubmit={onSubmit}>
           <label>
             Your name
-            <input name="name" required placeholder="Full name" />
+            <input
+              name="Full Name"
+              required
+              autoComplete="name"
+              placeholder="Full name"
+            />
           </label>
+
           <label>
             Email address
-            <input name="email" required type="email" placeholder="you@example.com" />
+            <input
+              name="Email"
+              required
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+            />
           </label>
+
           <label>
             Preferred date
             <input
-              name="preferred_date"
+              name="Preferred Viewing Date"
               required
               type="date"
-              min={new Date().toISOString().split('T')[0]}
+              min={new Date().toLocaleDateString('en-CA')}
             />
           </label>
+
           <label>
             Anything we should know?
             <textarea
-              name="message"
+              name="Message"
               placeholder="Preferred time, questions, or requirements"
               rows={3}
             />
           </label>
 
-          <button className="button button-dark" type="submit">
-            Request viewing <ArrowRight size={16} />
+          {error && (
+            <p className="form-error" role="alert">
+              {error}
+            </p>
+          )}
+
+          <button
+            className="button button-dark"
+            type="submit"
+            disabled={submitting}
+          >
+            {submitting ? 'Sending request…' : 'Request viewing'}
+            {!submitting && <ArrowRight size={16} />}
           </button>
 
           <small className="disclaimer">
-            Starter template only. Connect a backend or form service to receive booking requests.
+            Your request will be sent to our property team. We’ll follow up with you shortly.
           </small>
         </form>
       </div>
