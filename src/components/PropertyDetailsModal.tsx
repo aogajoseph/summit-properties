@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import {
-  ArrowLeft,
   ArrowRight,
   BedDouble,
   ChevronLeft,
