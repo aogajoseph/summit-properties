@@ -1,4 +1,13 @@
-import { ArrowRight, BedDouble, MapPin, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import {
+  ArrowLeft,
+  ArrowRight,
+  BedDouble,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  X,
+} from 'lucide-react'
 import type { Property } from '../content/site'
 
 interface PropertyDetailsModalProps {
@@ -12,7 +21,48 @@ export default function PropertyDetailsModal({
   onClose,
   onBookViewing,
 }: PropertyDetailsModalProps) {
+  const [activeImage, setActiveImage] = useState(0)
+
+  const images = property
+    ? [...new Set(
+        [property.image, ...(property.images ?? [])].filter(Boolean),
+      )]
+    : []
+
+  useEffect(() => {
+    setActiveImage(0)
+  }, [property?.title])
+
+  useEffect(() => {
+    if (!property) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+
+      if (event.key === 'ArrowRight') {
+        setActiveImage((current) => (current + 1) % images.length)
+      }
+
+      if (event.key === 'ArrowLeft') {
+        setActiveImage(
+          (current) => (current - 1 + images.length) % images.length,
+        )
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [property, images.length, onClose])
+
   if (!property) return null
+
+  const showPrevious = () => {
+    setActiveImage((current) => (current - 1 + images.length) % images.length)
+  }
+
+  const showNext = () => {
+    setActiveImage((current) => (current + 1) % images.length)
+  }
 
   return (
     <div
@@ -36,7 +86,66 @@ export default function PropertyDetailsModal({
           <X />
         </button>
 
-        <img src={property.image} alt={property.title} />
+        <div className="property-gallery">
+          <div className="property-gallery-main">
+            <img
+              src={images[activeImage] ?? property.image}
+              alt={`${property.title} — image ${activeImage + 1}`}
+            />
+
+            {images.length > 1 && (
+              <>
+                <button
+                  className="gallery-arrow gallery-arrow-left"
+                  type="button"
+                  onClick={showPrevious}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft />
+                </button>
+
+                <button
+                  className="gallery-arrow gallery-arrow-right"
+                  type="button"
+                  onClick={showNext}
+                  aria-label="Next image"
+                >
+                  <ChevronRight />
+                </button>
+
+                <span className="gallery-counter">
+                  {activeImage + 1} / {images.length}
+                </span>
+              </>
+            )}
+          </div>
+
+          {images.length > 1 && (
+            <div
+              className="property-gallery-thumbnails"
+              aria-label="Property photos"
+            >
+              {images.map((image, index) => (
+                <button
+                  key={image}
+                  type="button"
+                  className={`gallery-thumbnail ${
+                    activeImage === index ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveImage(index)}
+                  aria-label={`View image ${index + 1}`}
+                  aria-pressed={activeImage === index}
+                >
+                  <img
+                    src={image}
+                    alt=""
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         <div className="modal-body">
           <div className="property-location">
@@ -66,7 +175,7 @@ export default function PropertyDetailsModal({
           </button>
 
           <small className="disclaimer">
-            Demo listing. Confirm availability, pricing and property details before publishing.
+            Love this property? Schedule a viewing and experience it in person.
           </small>
         </div>
       </div>
