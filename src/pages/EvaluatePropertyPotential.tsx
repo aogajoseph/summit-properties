@@ -14,7 +14,7 @@ import '../styles.css';
 import AdvisorModal from '../components/AdvisorModal'
 
 const article = {
-  title: 'How to Evaluate a Property’s Investment Potential Before You Buy',
+  title: 'How to Evaluate a Property’s Investment Potential Before Buying ',
   description:
     'Learn how to assess location, rental demand, total costs, property condition and long-term value before investing in real estate in Kenya.',
   image:
@@ -178,7 +178,7 @@ export default function EvaluatePropertyPotential() {
             <p>
               The key is to assess the property as a whole: what it costs, who
               might want it, what it will take to maintain, and how well it
-              fits your financial goals. Here are six questions to guide that process.
+              fits your financial goals. Here are six pointers to guide that process:
             </p>
 
             <section id="location" className="potential-section">
@@ -300,7 +300,7 @@ export default function EvaluatePropertyPotential() {
               <h2>Verify the legal details before committing</h2>
               <p>
                 A promising location and attractive numbers cannot compensate
-                for unclear ownership or unresolved legal issues. In Kenya,
+                for unclear ownership or unresolved legal issues. Generally,
                 property due diligence should be handled carefully and with
                 independent professional advice.
               </p>
@@ -374,7 +374,7 @@ export default function EvaluatePropertyPotential() {
             </section>
 
             <section className="potential-conclusion">
-              <h2>Choose potential you can explain—not promises you hope will come true.</h2>
+              <h2>Choose potential you can explain. Not promises you hope will come true.</h2>
               <p>
                 A good property decision is built on evidence, realistic
                 numbers and careful due diligence. Take the time to investigate
@@ -402,13 +402,21 @@ export default function EvaluatePropertyPotential() {
             <span className="potential-eyebrow">YOUR NEXT MOVE</span>
             <h2>Looking for a property with real potential?</h2>
             <p>
-              Speak with Summit Properties about your goals, your budget and
-              the kind of property you are considering.
+              Tell us about your goals, budget and
+              the kind of property you are looking for.
             </p>
           </div>
-          <a href="/#contact">
-            Talk to a property advisor <ArrowUpRight size={17} />
-          </a>
+          <a
+          className="potential-cta-button"
+          href="#contact"
+          onClick={(event) => {
+            event.preventDefault()
+            openAdvisor()
+          }}
+        >
+          Talk to an advisor
+          <ArrowUpRight size={16} />
+        </a>
         </section>
 
         <AdvisorModal
@@ -425,8 +433,14 @@ export default function EvaluatePropertyPotential() {
       </main>
 
       <footer className="potential-footer">
-        <a href="/#home" className="potential-footer-brand">SUMMIT PROPERTIES</a>
-        <span>Find your next horizon.</span>
+        <a className="brand" href="/#home">
+          <span className="brand-mark"><span /></span>
+          <span className="blog-brand-copy">
+            <strong>SUMMIT PROPERTIES</strong>
+            <small>Find your next horizon.</small>
+          </span>
+        </a>
+        <span>© {new Date().getFullYear()} Summit Properties Ltd.</span>
         <a href="/#insights">More insights <ArrowRight size={14} /></a>
       </footer>
 
