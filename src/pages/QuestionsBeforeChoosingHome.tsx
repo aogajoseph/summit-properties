@@ -1,13 +1,16 @@
-
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
   Clock3,
+  Check,
+  X,
 } from 'lucide-react'
 import '../styles.css'
+
+import AdvisorModal from '../components/AdvisorModal'
 
 const article = {
   title: 'Five Questions to Ask Before Choosing Your Next Home',
@@ -22,6 +25,10 @@ const article = {
 }
 
 function QuestionsBeforeChoosingHome() {
+  const [notice, setNotice] = useState('')
+  const [advisorOpen, setAdvisorOpen] = useState(false);
+  const [enquiryType, setEnquiryType] = useState('General property advice')
+
   useEffect(() => {
     document.title = `${article.title} | Summit Properties`
 
@@ -51,11 +58,16 @@ function QuestionsBeforeChoosingHome() {
     setMeta('name', 'twitter:image', article.image)
   }, [])
 
+  const openAdvisor = (type = 'General property advice') => {
+    setEnquiryType(type)
+    setAdvisorOpen(true)
+  }
+
   return (
     <div className="blog-page">
       <header className="blog-header">
-        <a className="blog-brand" href="/#home" aria-label="Summit Properties home">
-          <span className="blog-brand-mark"><span /></span>
+        <a className="brand" href="/#home" aria-label="Summit Properties home">
+          <span className="brand-mark"><span /></span>
           <span className="blog-brand-copy">
             <strong>SUMMIT PROPERTIES</strong>
             <small>Find your next horizon.</small>
@@ -68,8 +80,16 @@ function QuestionsBeforeChoosingHome() {
           <a href="/#insights">Insights</a>
         </nav>
 
-        <a className="blog-header-cta" href="/#contact">
-          Talk to an advisor <ArrowUpRight size={16} />
+        <a
+          className="blog-header-cta"
+          href="#contact"
+          onClick={(event) => {
+            event.preventDefault()
+            openAdvisor()
+          }}
+        >
+          Talk to an advisor
+          <ArrowUpRight size={16} />
         </a>
       </header>
 
@@ -339,6 +359,18 @@ function QuestionsBeforeChoosingHome() {
             Talk to a property advisor <ArrowUpRight size={17} />
           </a>
         </section>
+
+        <AdvisorModal
+          open={advisorOpen}
+          initialEnquiryType={enquiryType}
+          onClose={() => {
+            setAdvisorOpen(false)
+            setEnquiryType('General property advice')
+          }}
+          onSubmitSuccess={() => {
+            setNotice('Thank you. Your enquiry has been submitted successfully.')
+          }}
+        />
       </main>
 
       <footer className="blog-footer">
@@ -352,6 +384,31 @@ function QuestionsBeforeChoosingHome() {
         <span>© {new Date().getFullYear()} Summit Properties Ltd.</span>
         <a href="/#insights">More insights <ArrowRight size={14} /></a>
       </footer>
+
+      {notice && 
+
+        <div className="toast" role="status">
+
+          <Check size={18} />
+
+          {notice}
+
+          <button 
+
+            onClick={() => setNotice('')} 
+
+            aria-label="Dismiss notice"
+
+          >
+
+            <X size={16} />
+
+          </button>
+
+        </div>
+
+      }
+
     </div>
   )
 }
