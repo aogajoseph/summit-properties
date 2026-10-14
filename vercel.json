@@ -1,9 +1,12 @@
-
 {
   "rewrites": [
     {
-      "source": "/blog/(.*)",
-      "destination": "/index.html"
+      "source": "/blog/questions-before-choosing-a-home",
+      "destination": "/blog/questions-before-choosing-a-home/index.html"
+    },
+    {
+      "source": "/blog/evaluate-property-potential",
+      "destination": "/blog/evaluate-property-potential/index.html"
     }
   ]
 }
