@@ -382,8 +382,8 @@ function QuestionsBeforeChoosingHome() {
       </main>
 
       <footer className="blog-footer">
-        <a className="blog-brand" href="/#home">
-          <span className="blog-brand-mark"><span /></span>
+        <a className="brand" href="/#home">
+          <span className="brand-mark"><span /></span>
           <span className="blog-brand-copy">
             <strong>SUMMIT PROPERTIES</strong>
             <small>Find your next horizon.</small>
