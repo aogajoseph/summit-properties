@@ -1392,7 +1392,7 @@ button {
 .blog-breadcrumb {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 30px 28px 24px;
+  padding: 110px 28px 24px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1417,7 +1417,7 @@ button {
   max-width: 850px;
   margin: 0 auto;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 40px;
 }
 
 .blog-eyebrow {
@@ -1775,6 +1775,10 @@ button {
 
   .blog-article {
     padding: 5px 20px 0;
+  }
+
+  .blog-article-header {
+    padding: 100px 0 0 0;
   }
 
   .blog-article-header h1 {
