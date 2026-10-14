@@ -108,14 +108,14 @@ function QuestionsBeforeChoosingHome() {
             </span>
 
             <h1>
-              Five questions to ask before choosing your next{' '}
-              <em>home.</em>
+              Five questions to ask before{' '}
+              <em>choosing your next home.</em>
             </h1>
 
             <p className="blog-standfirst">
-              The right home is about more than what catches your eye.
-              Before you commit, ask the questions that help you look beyond
-              the viewing and make a decision with confidence.
+              The right home is beyond what catches your eye.
+              Before you commit, ask the five questions that help you look beyond
+              the viewing and decide with confidence.
             </p>
 
             <div className="blog-article-meta">
@@ -155,9 +155,9 @@ function QuestionsBeforeChoosingHome() {
               </p>
 
               <p>
-                Whether you are buying your first home, moving to accommodate
+                Are you buying your first home, moving to accommodate
                 a growing family or considering a property as a long-term
-                investment, a little preparation can help you avoid expensive
+                investment? A little preparation can help you avoid expensive
                 surprises. Start with these five questions.
               </p>
 
@@ -264,7 +264,7 @@ function QuestionsBeforeChoosingHome() {
                   documents provided.
                 </p>
                 <p>
-                  In Kenya, the checks required will depend on the property
+                  Generally, the checks required will depend on the property
                   and the nature of the transaction. Your independent
                   conveyancing advocate can help arrange the appropriate
                   official searches and review the title or other ownership
@@ -323,20 +323,20 @@ function QuestionsBeforeChoosingHome() {
               <section className="blog-conclusion">
                 <span className="blog-eyebrow">
                   <span className="blog-eyebrow-line" />
-                  THE SUMMIT PERSPECTIVE
+                  THE SUMMIT INSIGHTS
                 </span>
-                <h2>Choose with clarity, not pressure.</h2>
+                <h2>Make your next move a considered one.</h2>
                 <p>
-                  A good property decision brings together the numbers, the
-                  location, the condition, the documentation and your plans
+                  A good property decision brings together the numbers, 
+                  location, condition, documentation and your plans
                   for the future. No single viewing can answer every
-                  question—and you do not need to rush to find the right fit.
+                  question, and you do not need to rush to find the right fit.
                 </p>
                 <p>
                   Take the time to compare options, verify the details and
                   seek independent professional advice where needed. The goal
                   is not simply to find a property you like. It is to make a
-                  decision you understand and feel comfortable standing behind.
+                  decision you understand and feel comfortable standing behind it.
                 </p>
               </section>
             </div>
@@ -351,12 +351,20 @@ function QuestionsBeforeChoosingHome() {
             </span>
             <h2>Good decisions start with the right conversation.</h2>
             <p>
-              Tell us what you are looking for. We can help you explore your
-              options and identify the questions worth asking along the way.
+              Tell us what you are looking for. We will help you explore your
+              options and find the right fit.
             </p>
           </div>
-          <a href="/#contact" className="blog-cta-button">
-            Talk to a property advisor <ArrowUpRight size={17} />
+          <a
+            className="blog-cta-button"
+            href="#contact"
+            onClick={(event) => {
+              event.preventDefault()
+              openAdvisor()
+            }}
+          >
+            Talk to an advisor
+            <ArrowUpRight size={16} />
           </a>
         </section>
 
