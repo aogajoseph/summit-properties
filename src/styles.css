@@ -1867,48 +1867,11 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-  border-bottom: 1px solid var(--potential-line);
-  background: var(--potential-paper);
-}
-
-.potential-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 11px;
-  flex-shrink: 0;
-}
-
-.potential-brand-mark,
-.potential-author-mark {
-  display: grid;
-  place-items: center;
-  background: var(--potential-green-dark);
-  color: #fff;
-  font-family: Georgia, 'Times New Roman', serif;
-}
-
-.potential-brand-mark {
-  width: 39px;
-  height: 39px;
-  font-size: 25px;
-  font-style: italic;
-}
-
-.potential-brand-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  letter-spacing: 2px;
-}
-
-.potential-brand-copy strong {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.potential-brand-copy small {
-  font-size: 9px;
-  letter-spacing: 3px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 .potential-nav {
@@ -2023,14 +1986,6 @@ button {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 30px;
-}
-
-.potential-author-mark {
-  width: 37px;
-  height: 37px;
-  border-radius: 50%;
-  font-size: 21px;
-  font-style: italic;
 }
 
 .potential-byline > span:nth-child(2) {

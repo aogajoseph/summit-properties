@@ -1,5 +1,4 @@
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -7,8 +6,12 @@ import {
   CheckCircle2,
   Clock3,
   TrendingUp,
+  Check,
+  X,
 } from 'lucide-react';
 import '../styles.css';
+
+import AdvisorModal from '../components/AdvisorModal'
 
 const article = {
   title: 'How to Evaluate a Property’s Investment Potential Before You Buy',
@@ -44,6 +47,10 @@ function setMeta(attribute: string, key: string, content: string) {
 }
 
 export default function EvaluatePropertyPotential() {
+  const [notice, setNotice] = useState('')
+  const [advisorOpen, setAdvisorOpen] = useState(false);
+  const [enquiryType, setEnquiryType] = useState('General property advice')
+
   useEffect(() => {
     document.title = `${article.title} | Summit Properties`;
 
@@ -59,14 +66,19 @@ export default function EvaluatePropertyPotential() {
     setMeta('name', 'twitter:image', article.image);
   }, []);
 
+  const openAdvisor = (type = 'General property advice') => {
+    setEnquiryType(type)
+    setAdvisorOpen(true)
+  }
+
   return (
     <div className="potential-page">
       <header className="potential-header">
-        <a className="potential-brand" href="/#home" aria-label="Summit Properties home">
-          <span className="potential-brand-mark">S</span>
-          <span className="potential-brand-copy">
-            <strong>SUMMIT</strong>
-            <small>PROPERTIES</small>
+        <a className="brand" href="/#home" aria-label="Summit Properties home">
+          <span className="brand-mark"><span /></span>
+          <span className="blog-brand-copy">
+            <strong>SUMMIT PROPERTIES</strong>
+            <small>Find your next horizon.</small>
           </span>
         </a>
 
@@ -77,8 +89,16 @@ export default function EvaluatePropertyPotential() {
           <a href="/#insights" aria-current="page">Insights</a>
         </nav>
 
-        <a className="potential-header-cta" href="/#contact">
-          Talk to an advisor <ArrowUpRight size={15} />
+        <a
+          className="potential-header-cta"
+          href="#contact"
+          onClick={(event) => {
+            event.preventDefault()
+            openAdvisor()
+          }}
+        >
+          Talk to an advisor
+          <ArrowUpRight size={16} />
         </a>
       </header>
 
@@ -105,7 +125,7 @@ export default function EvaluatePropertyPotential() {
             </p>
 
             <div className="potential-byline">
-              <span className="potential-author-mark">S</span>
+              <span className="potential-brand-mark"></span>
               <span>
                 <strong>Summit Properties</strong>
                 <small>Practical guidance for smarter property decisions</small>
@@ -390,6 +410,18 @@ export default function EvaluatePropertyPotential() {
             Talk to a property advisor <ArrowUpRight size={17} />
           </a>
         </section>
+
+        <AdvisorModal
+          open={advisorOpen}
+          initialEnquiryType={enquiryType}
+          onClose={() => {
+            setAdvisorOpen(false)
+            setEnquiryType('General property advice')
+          }}
+          onSubmitSuccess={() => {
+            setNotice('Thank you. Your enquiry has been submitted successfully.')
+          }}
+        />
       </main>
 
       <footer className="potential-footer">
@@ -397,6 +429,30 @@ export default function EvaluatePropertyPotential() {
         <span>Find your next horizon.</span>
         <a href="/#insights">More insights <ArrowRight size={14} /></a>
       </footer>
+
+      {notice && 
+
+        <div className="toast" role="status">
+
+          <Check size={18} />
+
+          {notice}
+
+          <button 
+
+            onClick={() => setNotice('')} 
+
+            aria-label="Dismiss notice"
+
+          >
+
+            <X size={16} />
+
+          </button>
+
+        </div>
+
+      }
     </div>
   );
 }
